@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-blue.svg)](http://creativecommons.org/licenses/by-sa/4.0/)
-[![Workflow results](https://github.com/prog2-unimi/handouts/actions/workflows/gradle.yml/badge.svg)](https://github.com/prog2-unimi/handouts/actions/workflows/gradle.yml)
+[![Workflow results](https://github.com/prog2-unimi/handouts/actions/workflows/gradle.yml/badge.svg)](https://github.com/IncredibleLego/handouts/actions/workflows/gradle.yml)
 
 Questo repository contiene gli *handout* dell'insegnamento di [Programmazione
 II](https://prog2.di.unimi.it/) del corso di laurea in
@@ -15,46 +15,7 @@ collezione del *materiale didattico* prodotto dal docente e dalla soluzione o im
 degli esercizi svolti dallo studente.
 
 La situazione attuale della risoluzione degli esercizi e test può essere visualizzata [qui](build/reports/tests/test/classesJubbiotTest.html)
-## Organizzazione del materiale
 
-Il contenuto di questo *repository* segue l'organizzazione dei file prevista dal
-*build automation tool* scelto per la gestione del codice (si veda la prossima
-sezione per maggiori dettagli).
-
-In particolare, i **file sorgenti** sono contenuti nella directory
-`src/main/java`, divisi in sottodirectory una per ciascuna lezione; più nel
-dettaglio, ad esempio nel caso della *decima lezione*, le directory
-
-```
-src/main/java/it/unimi/di/prog2/h10
-src/main/java/it/unimi/di/prog2/e10
-src/main/java/it/unimi/di/prog2/s10
-```
-
-contengono rispettivamente il codice relativo a:
-
-* gli **esempi presentati in classe** (cartella `h10`),
-* gli **esercizi assegnati per casa** (cartella `e10`) e
-* le **soluzioni di una selezione degli esercizi** assegnati per casa (cartella
-  `s10`); si noti che non tutte le lezioni hanno esercizi assegnati e non per
-  tutti gli esercizi assegnati viene pubblicata una soluzione.
-
-Il codice Java è corredato dalla **documentazione** che può essere generata in
-locale come illustrato di seguito, o [acceduta
-direttamente](https://prog2-unimi.github.io/handouts/).
-
-La directory `tests` contiene i file necessari all'esecuzione dei **test
-black-box** realizzati secondo le modalità previste dalla libreria
-[Jubbiot](https://github.com/prog2-unimi/jubbiot); i test possono essere
-eseguiti in locale (tramite il *build automation tool*) come illustrato di
-seguito. 
-
-> **NOTA BENE**: il *superamento dell'esame* è subordinato alla **corretta
-> esecuzione di tutti i test** associati al progetto, è pertanto *fortemente
-> consigliato* che lo studente familiarizzi da subito con il meccanismo di
-> testing.
-
-## Come ottenere ed utilizzare questo materiale sul proprio computer
 
 ## Guida all'uso di Git
 
@@ -131,6 +92,45 @@ Tale comando è configurato per riportare un errore in caso di *warning*, per ai
 
 È possibile accedere direttamente ad una copia già compilata della
 [documentazione del codice in questo repository](https://prog2-unimi.github.io/handouts/).
+
+## Organizzazione del materiale
+
+Il contenuto di questo *repository* segue l'organizzazione dei file prevista dal
+*build automation tool* scelto per la gestione del codice (si veda la prossima
+sezione per maggiori dettagli).
+
+In particolare, i **file sorgenti** sono contenuti nella directory
+`src/main/java`, divisi in sottodirectory una per ciascuna lezione; più nel
+dettaglio, ad esempio nel caso della *decima lezione*, le directory
+
+```
+src/main/java/it/unimi/di/prog2/h10
+src/main/java/it/unimi/di/prog2/e10
+src/main/java/it/unimi/di/prog2/s10
+```
+
+contengono rispettivamente il codice relativo a:
+
+* gli **esempi presentati in classe** (cartella `h10`),
+* gli **esercizi assegnati per casa** (cartella `e10`) e
+* le **soluzioni di una selezione degli esercizi** assegnati per casa (cartella
+  `s10`); si noti che non tutte le lezioni hanno esercizi assegnati e non per
+  tutti gli esercizi assegnati viene pubblicata una soluzione.
+
+Il codice Java è corredato dalla **documentazione** che può essere generata in
+locale come illustrato di seguito, o [acceduta
+direttamente](https://prog2-unimi.github.io/handouts/).
+
+La directory `tests` contiene i file necessari all'esecuzione dei **test
+black-box** realizzati secondo le modalità previste dalla libreria
+[Jubbiot](https://github.com/prog2-unimi/jubbiot); i test possono essere
+eseguiti in locale (tramite il *build automation tool*) come illustrato di
+seguito. 
+
+> **NOTA BENE**: il *superamento dell'esame* è subordinato alla **corretta
+> esecuzione di tutti i test** associati al progetto, è pertanto *fortemente
+> consigliato* che lo studente familiarizzi da subito con il meccanismo di
+> testing.
 
 ## Materiale Anni Passati
 

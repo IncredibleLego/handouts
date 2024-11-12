@@ -52,7 +52,7 @@ public class SequenzeDiCaratteri {
 
     CharSequence sequenza;
 
-    String stringa = new String(args[0]);
+    String stringa = args[0];
 
     sequenza = stringa;
     for (int i = 0; i < sequenza.length(); i++)
@@ -60,7 +60,9 @@ public class SequenzeDiCaratteri {
 
     StringBuilder concatenatore = new StringBuilder();
 
-    for (int i = 0; i < args.length; i++) concatenatore.append(args[i]);
+      for (String arg : args) {
+          concatenatore.append(arg);
+      }
 
     sequenza = concatenatore;
     for (int i = 0; i < sequenza.length(); i++)
