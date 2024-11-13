@@ -141,3 +141,5 @@ seguito.
 * branch dell'[AA 2023/24](../../tree/aa2324).
 
 [comment]: <> (Per modificare il file con l'anteprima premere CTRL + Shift + V)
+
+Francesco Corrado
