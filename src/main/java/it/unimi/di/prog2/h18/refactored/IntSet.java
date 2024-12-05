@@ -19,26 +19,28 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.e03;
+package it.unimi.di.prog2.h18.refactored;
 
-/**
- * Vedi <a
- * href="https://github.com/mapio/labprog/blob/master/esercizi/lettera_piu_frequente/Testo.md">testo</a>,
- */
-public class LetteraPiuFrequente {
+/** A concrete set of integers. */
+public class IntSet extends ListBasedAbstractIntSet {
 
-  /** . */
-  private LetteraPiuFrequente() {}
+  /*-
+   * AF(elements, size) = { elements.get(0), elements.get(1), ..., elements.get(size - 1) }
+   * RI:
+   *   - super.RI
+   *   - elements != null and does not contain nulls.
+   */
 
-  /*- Completa il seguente main
+  /** Creates an empty set. */
+  public IntSet() {}
 
-  public static void main(String[] args) {
-    try (Scanner s = new Scanner(System.in)) {
-      while (s.hasNext()) {
-        final String parola = s.nextLine();
-      }
+  @Override
+  public void insert(int x) {
+    // the use of isIn(x) instead of !elements.contains(x)
+    // can take advantage of improved implementations in subclasses
+    if (!isIn(x)) {
+      elements.add(x);
+      size++;
     }
   }
-
-  */
 }
