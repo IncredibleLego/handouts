@@ -21,8 +21,51 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e06;
 
-/** Esercizio 4.3 di PDJ. */
+import java.util.Scanner;
+
+/** Esercizio 4.3 di PDJ.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
 public class SumClient {
+
+  public static int sumElements(int[] arr) throws NullPointerException {
+    //REQUIRES: arr is not null, else throws NullPointerException
+    //EFFECTS: returns the sum of all elements in arr, else throws NullPointerException
+    if (arr == null) {
+      throw new NullPointerException("Array is null");
+    }
+    int sum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      sum += arr[i];
+    }
+    return sum;
+  }
+
+  /**
+   * Reads a sequence of max 100 integers, and prints the sum in System.out
+   * 
+   * @param args
+   */
+  public static void main(String[] args) {
+    //REQUIRES: args containing integers separated by space, not more than 100
+    //EFFECTS: sums all of the elements of args and prints the result
+    int[] arr = new int[100];
+    int c = 0;
+    try (Scanner s = new Scanner(System.in)){
+      while (s.hasNext()){
+        String[] values = s.nextLine().split(" ");
+        for (int i=0; i < values.length; i++){
+          arr[c] = Integer.parseInt(values[i]);
+          c++;
+          if (c == 100){
+            break;
+          }
+        }
+      }
+    }
+    System.out.println(sumElements(arr));
+  }
 
   /** . */
   private SumClient() {}
@@ -31,3 +74,6 @@ public class SumClient {
   // più 100 interi e ne emette la somma nel flusso d'uscita.
 
 }
+
+/* 4.3 A specification for a procedure that computes the sum of the elements in an array of integers might require a nonempty array, return 0 if the array is empty, 
+or throw an exception if the array is empty. Discuss which alternative is best and provide the specification for the procedure. */
