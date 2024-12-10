@@ -29,6 +29,13 @@ import java.util.Scanner;
  */
 public class SumClient {
 
+  /**
+   * Sums all the elements of an array of integers
+   * 
+   * @param arr
+   * @return the sum of all elements in arr
+   * @throws NullPointerException if arr is null
+   */
   public static int sumElements(int[] arr) throws NullPointerException {
     //REQUIRES: arr is not null, else throws NullPointerException
     //EFFECTS: returns the sum of all elements in arr, else throws NullPointerException
