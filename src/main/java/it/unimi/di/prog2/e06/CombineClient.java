@@ -25,11 +25,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/** Esercizio 4.4 di PDJ. */
+/** Esercizio 4.4 di PDJ.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
 public class CombineClient {
 
-  /** . */
-  private CombineClient() {}
+  /**
+   * Multiplies each element of a by the sum of the elements of b
+   * 
+   * @param a
+   * @param b
+   * @throws NullPointerException if a or b is null
+   */
+  static void combine (int[ ] a, int[ ] b) throws NullPointerException {
+    //REQUIRES: a and b are not null, else throws NullPointerException
+    //MODIFIES: a
+    //EFFECTS: multiplies each element of a by the sum of the elements of b
+    if (a == null || b == null) {
+      throw new NullPointerException("Array is null");
+    }
+    int sum = 0;
+    for (int i = 0; i < b.length; i++) {
+      sum += b[i];
+    }
+    for (int i = 0; i < a.length; i++) {
+      a[i] *= sum;
+    }
+  }
 
   /**
    * Decodifica una stringa contenente interi separati da spazi.
@@ -48,6 +71,30 @@ public class CombineClient {
     return result;
   }
 
+  /**
+   * Reads lines from standard input, decodes them and prints the result.
+   * 
+   * @param args string of numbers separated by spaces
+   */
+  public static void main(String[] args) {
+      //REQUIRES: args containing integers separated by space
+      //EFFECTS: reads two lines from standard input, decodes them and prints the result
+      try (Scanner s = new Scanner(System.in)){
+        while (s.hasNext()){
+          String str = s.nextLine();
+          int[] a = parseInts(str);
+          int[] b = parseInts(s.nextLine());
+          combine(a, b);
+          for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+          }
+        }
+      }
+  }
+
+  /** . */
+  private CombineClient() {}
+
   // Il main di questa classe legge due righe dal flusso di ingresso ciascuna
   // delle quali contiene gli interi (separati da spazi) di uno dei due array da
   // combinare e ne emette il risultato della combinazione (separando gli interi
@@ -55,3 +102,9 @@ public class CombineClient {
   // ciascuna delle due linee in ingresso.
 
 }
+
+/*Consider a procedure
+  static void combine (int[ ] a, int[ ] b)
+that multiplies each element of a by the sum of the elements of b; for example, if a = [1, 2, 3] and b = [4, 5], then on return a = [9, 18, 27].
+What should this procedure do if a or b is null or empty? Give a specification for combine that answers these questions and explain why your specification 
+is a good one. */
