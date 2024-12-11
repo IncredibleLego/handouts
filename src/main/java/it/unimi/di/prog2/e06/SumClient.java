@@ -62,13 +62,13 @@ public class SumClient {
     try (Scanner s = new Scanner(System.in)){
       while (s.hasNext()){
         String[] values = s.nextLine().split(" ");
-        for (int i=0; i < values.length; i++){
-          arr[c] = Integer.parseInt(values[i]);
-          c++;
-          if (c == 100){
-            break;
+          for (String value : values) {
+              arr[c] = Integer.parseInt(value);
+              c++;
+              if (c == 100){
+                  break;
+              }
           }
-        }
       }
     }
     System.out.println(sumElements(arr));
