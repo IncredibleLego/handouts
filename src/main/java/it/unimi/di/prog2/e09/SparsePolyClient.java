@@ -21,11 +21,13 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e09;
 
-/** A class to test some methods of {@link SparsePoly}. */
-public class SparsePolyClient {
+import java.util.Scanner;
 
-  /** . */
-  private SparsePolyClient() {}
+/** A class to test some methods of {@link SparsePoly}.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
+public class SparsePolyClient {
 
   /**
    * Tests some methods of {@link SparsePoly}.
@@ -38,9 +40,10 @@ public class SparsePolyClient {
    * @param args not used.
    */
 
-  /*- Uncomment the main method once you have implemented the SparsePoly class
-
   public static void main(String[] args) {
+    // REQUIRES: a list of terms from the standard input, given as a (coefficient, degree
+    // MODIFIES: System.out
+    // EFFECTS: computes the polynomial \( p_{i+1} = p_i \codt t_i + t_i \) emitting in the standard    
     SparsePoly result = new SparsePoly(1, 1).add(new SparsePoly(-1, 0));
     try (Scanner s = new Scanner(System.in)) {
       while (s.hasNextInt()) {
@@ -51,5 +54,6 @@ public class SparsePolyClient {
     }
   }
 
-  */
+  /** . */
+  private SparsePolyClient() {}
 }

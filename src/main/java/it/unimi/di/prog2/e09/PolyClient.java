@@ -21,11 +21,13 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e09;
 
-/** A class to test some methods of {@link Poly}. */
-public class PolyClient {
+import java.util.Scanner;
 
-  /** . */
-  private PolyClient() {}
+/** A class to test some methods of {@link Poly}.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
+public class PolyClient {
 
   /**
    * Tests some methods of {@link Poly}.
@@ -37,10 +39,11 @@ public class PolyClient {
    *
    * @param args not used.
    */
-
-  /*- Uncomment the main method once you have implemented the add method in Poly class
-
   public static void main(String[] args) {
+    //REQUIRES: a list of terms from the standard input, given as a (coefficient, degree)
+    //MODIFIES: System.out
+    //EFFECTS: computes the polynomial \( t_0 + t_1 + t_2 \cdots \), emitting in the standard output 
+    //the pairs "coefficient degree" for every term in the result (in increasing order of degree)
     Poly result = new Poly();
     try (Scanner s = new Scanner(System.in)) {
       while (s.hasNextInt()) {
@@ -51,5 +54,7 @@ public class PolyClient {
     }
   }
 
-  */
+  /** . */
+  private PolyClient() {}
+
 }
