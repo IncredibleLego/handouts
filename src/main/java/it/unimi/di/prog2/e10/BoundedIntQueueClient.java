@@ -21,11 +21,11 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e10;
 
-/** A class to exercise a {@link BoundedIntQueue}. */
+/** A class to exercise a {@link BoundedIntQueue}.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
 public class BoundedIntQueueClient {
-
-  /** . */
-  private BoundedIntQueueClient() {}
 
   /**
    * Tests some methods of {@link BoundedIntQueue}.
@@ -36,10 +36,12 @@ public class BoundedIntQueueClient {
    *
    * @param args not used.
    */
-
-  /* - Uncomment the following after completing the implementation of BoundedIntQueue
-
    public static void main(String[] args) {
+    //REQUIRES: a list of integers from the standard input
+    //MODIFIES: the queue
+    //EFFECTS: if a positive number is read, it is added to a bounded queue of size 10; 
+    //if a negative number is read, it is dequeued and emitted on the standard output. 
+    //When the input terminates, the queue is emitted on the standard output.
     BoundedIntQueue queue = new BoundedIntQueue(10);
     try (java.util.Scanner s = new java.util.Scanner(System.in)) {
       while (s.hasNextInt()) {
@@ -51,5 +53,7 @@ public class BoundedIntQueueClient {
     System.out.println(queue);
   }
 
-  */
+  /** . */
+  private BoundedIntQueueClient() {}
+
 }

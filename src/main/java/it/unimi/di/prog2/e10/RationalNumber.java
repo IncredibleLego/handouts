@@ -21,6 +21,10 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e10;
 
+import java.util.Objects;
+
+import it.unimi.di.prog2.e05.GcdClient;
+
 /**
  * A rational number is an immutable number that can be expressed as the quotient or fraction \( p/q
  * \) of two {@code int}s, a numerator \( p \) and a non-zero denominator \( q \).
@@ -32,13 +36,32 @@ public class RationalNumber {
   // equals, hashCode, and toString methods); add methods that are adequate to
   // the specification.
 
+  //Fields
+
+  private final int p, q;
+
+  //Constructors
+
   /**
    * Creates a new rational number.
    *
    * @param numerator the numerator.
    * @param denominator the denominator.
    */
-  public RationalNumber(int numerator, int denominator) {}
+  public RationalNumber(int numerator, int denominator) {
+    if (denominator == 0){
+      throw new IllegalArgumentException("Denominator must be non-zero");
+    }
+    else if (denominator < 0) {
+      numerator = -numerator;
+      denominator = -denominator;
+    }
+    int gcd = GcdClient.gcd(numerator > 0 ? numerator : -numerator, denominator > 0 ? denominator : -denominator);
+    p = numerator / gcd;
+    q = denominator / gcd;
+  }
+
+  //Methods
 
   /**
    * Returns the sum of this rational number and another one.
@@ -47,7 +70,9 @@ public class RationalNumber {
    * @return the sum of this rational number and {@code other}.
    */
   public RationalNumber add(RationalNumber other) {
-    return null;
+    //REQUIRES: other is not null
+    //EFFECTS: returns the sum of this rational number and other
+    return new RationalNumber(p * other.q + q * other.p, q * other.q);
   }
 
   /**
@@ -57,6 +82,26 @@ public class RationalNumber {
    * @return the product of this rational number and {@code other}.
    */
   public RationalNumber mul(RationalNumber other) {
-    return null;
+    //REQUIRES: other is not null
+    //EFFECTS: returns the product of this rational number and other
+    return new RationalNumber(p * other.p, q * other.q);
+  }
+  
+  @Override
+  public String toString() {
+    return p + "/" + q;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null || !(obj instanceof RationalNumber obj2)) {
+      return false;
+    }
+    return p == obj2.p && q == obj2.q;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(p, q);
   }
 }

@@ -39,13 +39,29 @@ public class BoundedIntQueue {
   // Collection Framework class. An array can be used to store the elements in a
   // circular buffer (see https://www.wikiwand.com/en/articles/Circular_buffer).
 
+  //Fields
+
+  private final int[] queue;
+  private int start, size;
+
+  //Constructors
+
   /**
    * Creates a new bounded queue with the given capacity.
    *
    * @param capacity the capacity of the queue.
    * @throws IllegalArgumentException if {@code capacity} is negative.
    */
-  public BoundedIntQueue(int capacity) {}
+  public BoundedIntQueue(int capacity) {
+    if (capacity < 0) {
+      throw new IllegalArgumentException("Capacity must be non-negative");
+    }
+    queue = new int[capacity];
+    start = 0;
+    size = 0;
+  }
+
+  //Methods
 
   /**
    * Adds an element to the queue.
@@ -53,7 +69,21 @@ public class BoundedIntQueue {
    * @param x the element to add.
    * @throws IllegalStateException if the queue is full.
    */
-  public void enqueue(int x) {}
+  public void enqueue(int x) {
+    //REQUIRES: x is an integer
+    //MODIFIES: this
+    //EFFECTS: if the queue is full throws an exception, otherwise adds x to the queue
+    if (size == queue.length) {
+      throw new IllegalStateException("Queue is full");
+    }
+    for (int i = start; i < queue.length; i++) {
+      if (queue[i] == 0){
+        queue[i] = x;
+        break;
+      }
+    }
+    size++;
+  }
 
   /**
    * Removes the element at the head of the queue.
@@ -62,6 +92,51 @@ public class BoundedIntQueue {
    * @throws IllegalStateException if the queue is empty.
    */
   public int dequeue() {
-    return 0;
+    //MODIFIES: this
+    //EFFECTS: if the queue is empty throws an exception, otherwise removes the element at the head of the queue
+    if (size == 0) {
+      throw new IllegalStateException("queue is empty");
+    }
+    int element = queue[start];
+    start = (start + 1) % queue.length;
+    size--;
+    return element;
+  }
+
+  /**
+   * Overrides the default {@link Object#toString()} method to provide a string representation of the
+   * queue that starts with "BountedIntQueue: [" and lists the elements in the queue separated by
+   * commas. If the queue is empty, the string representation is "BoundedIntQueue: []".
+   *
+   * @return the number of elements in the queue.
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("BoundedIntQueue: [");
+    if (queue[start] != 0) sb.append(queue[start]);
+    for (int i = 1; i<size ; i++) {
+      int index = (start+i)%queue.length;
+      sb.append(", ").append(String.valueOf(queue[index]));
+    }
+    sb.append("]");
+    return sb.toString();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+      if (obj == null || !(obj instanceof BoundedIntQueue obj2) || obj2.size != size){
+        return false;
+      }
+      return obj.equals(toString());
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 0;
+    for (int i = 0; i < queue.length; i++) {
+      int index = (start+i)%queue.length;
+      result = queue[index]*queue[start] + Integer.hashCode(queue[index]);
+    }
+    return result; 
   }
 }

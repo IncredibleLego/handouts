@@ -21,11 +21,13 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e10;
 
-/** A class to exercise a {@link RationalNumber}. */
-public class RationalNumberClient {
+import java.util.Scanner;
 
-  /** . */
-  private RationalNumberClient() {}
+/** A class to exercise a {@link RationalNumber}.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
+public class RationalNumberClient {
 
   /**
    * Tests some methods of {@link BoundedIntQueue}.
@@ -39,9 +41,6 @@ public class RationalNumberClient {
    *
    * @param args the numerator and denominator of the resulting fraction.
    */
-
-  /* - Uncomment the following after completing the implementation of RationalNumber
-
   public static void main(String[] args) {
     RationalNumber expected =
         new RationalNumber(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
@@ -55,5 +54,7 @@ public class RationalNumberClient {
     System.out.println(result.equals(expected));
   }
 
-  */
+  /** . */
+  private RationalNumberClient() {}
+
 }
