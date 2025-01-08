@@ -102,14 +102,8 @@ public class IntRange implements Iterable<Integer> {
   public Iterator<Integer> iterator() {
     if (step > 0 && from > to || step < 0 && from < to) throw new IllegalArgumentException();
     return new Iterator<Integer>() {
-
-      /** The next candidate. */
       private int next = from;
-
-      /** The unmodifiable copy of the to. */
       private final int to = IntRange.this.to;
-
-      /** The unmodifiable copy of the step. */
       private final int step = IntRange.this.step;
 
       @Override
@@ -127,5 +121,14 @@ public class IntRange implements Iterable<Integer> {
         return result;
       }
     };
+  }
+
+  /**
+   * Returns the initial value.
+   *
+   * @param to the initial value.
+   */
+  public void setTo(int to) {
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 }

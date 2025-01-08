@@ -21,11 +21,15 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e15;
 
-/** A class to test int ranges. */
-public class IntRangeClient {
+import java.util.Scanner;
 
-  /** . */
-  private IntRangeClient() {}
+import it.unimi.di.prog2.s15.IntRange;
+
+/** A class to test int ranges.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
+public class IntRangeClient {
 
   /**
    * A method to test the {@link IntRange} class.
@@ -51,35 +55,39 @@ public class IntRangeClient {
    *
    * @param args not used.
    */
-
-  /*- Uncomment and complete once you have implemented the range class
-
     public static void main(String[] args) {
-      // declare the range...
+      int from = Integer.MIN_VALUE;
+      int to = Integer.MAX_VALUE;
+      int step = 1;
       try (Scanner sc = new Scanner(System.in)) {
         while (sc.hasNext()) {
           char command = sc.next().charAt(0);
           int value = sc.nextInt();
           switch (command) {
-            case 'F':
-              // set the from the range
-              break;
-            case 'T':
-              // set the to the range
-              break;
-            case 'S':
-              // set the step the range
-              break;
-            default:
-              throw new IllegalArgumentException("Unknown command: " + command);
+            case 'F' -> from = value;
+            case 'T' -> to = value;
+            case 'S' -> step = value;
+            default -> throw new IllegalArgumentException("Unknown command: " + command);
           }
         }
       }
+      IntRange range = new IntRange();
+      range.from(from);
+      range.to(to);
+      range.step(step);
       int iterations = 0, first = 0, last = 0;
-      // complete...
+      for (int i : range) {
+        if (iterations == 0) {
+          first = i;
+        }
+        last = i;
+        iterations++;
+      }
       System.out.println(
           iterations + (iterations > 0 ? " " + first : "") + (iterations > 1 ? " " + last : ""));
     }
 
-  */
+    /** . */
+    private IntRangeClient() {}
+  
 }

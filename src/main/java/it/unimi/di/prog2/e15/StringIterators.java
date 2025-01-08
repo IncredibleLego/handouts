@@ -23,7 +23,12 @@ package it.unimi.di.prog2.e15;
 
 import java.util.Iterator;
 
-/** Utility class with some string iterators. */
+/** Utility class with some string iterators.
+ * 
+ * <p>Instances of this class cannot be created.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
 public class StringIterators {
 
   /** . */
@@ -37,17 +42,28 @@ public class StringIterators {
    */
   public static Iterator<String> evenIterator(final Iterator<String> it) {
     return new Iterator<>() {
-
-      // EXERCISE: complete the implementation
+      private String nextEven = null;
 
       @Override
       public boolean hasNext() {
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+        while (it.hasNext()) {
+          String next = it.next();
+          if (next.length() % 2 == 0) {
+            nextEven = next;
+            return true;
+          }
+        }
+        return false;
       }
 
       @Override
       public String next() {
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        if (nextEven != null || hasNext()) {
+          String result = nextEven;
+          nextEven = null;
+          return result;
+        }
+        throw new java.util.NoSuchElementException();
       }
     };
   }
@@ -61,16 +77,14 @@ public class StringIterators {
   public static Iterator<String> uppercase(final Iterator<String> it) {
     return new Iterator<>() {
 
-      // EXERCISE: complete the implementation
-
       @Override
       public boolean hasNext() {
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+        return it.hasNext();
       }
 
       @Override
       public String next() {
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        return it.next().toUpperCase();
       }
     };
   }
