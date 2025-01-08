@@ -32,7 +32,7 @@ public class SumClient {
   /**
    * Sums all the elements of an array of integers
    * 
-   * @param arr
+   * @param arr an array of integers
    * @return the sum of all elements in arr
    * @throws NullPointerException if arr is null
    */
@@ -52,7 +52,7 @@ public class SumClient {
   /**
    * Reads a sequence of max 100 integers, and prints the sum in System.out
    * 
-   * @param args
+   * @param args the integers to sum
    */
   public static void main(String[] args) {
     //REQUIRES: args containing integers separated by space, not more than 100

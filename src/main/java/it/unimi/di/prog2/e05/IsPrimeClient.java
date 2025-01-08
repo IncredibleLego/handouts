@@ -49,7 +49,7 @@ public class IsPrimeClient {
   /**
    * Gets a number from args and passes it to a function. Prints result
    * 
-   * @param args
+   * @param args input number
    */
   public static void main(String[] args) { 
     //EFFECTS: creates a variable num from converting input in int and passes it to the isPrime function, printing the result in case it is positive

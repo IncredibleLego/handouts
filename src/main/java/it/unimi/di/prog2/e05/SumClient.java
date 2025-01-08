@@ -66,7 +66,7 @@ public class SumClient {
    * 
    * <p> Converts an array of strings in ints, passes the ints array to a functions that sums them and prints the result
    * 
-   * @param args
+   * @param args array of strings
    */
   public static void main(String[] args) {
     //EFFECTS: converts the args array in ints and prints the elements

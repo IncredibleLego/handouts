@@ -34,10 +34,10 @@ public class NaveSpaziale {
    * 
    * <p>Given a string, in adds to the string the n admount of characters c
    * 
-   * @param str
-   * @param n
-   * @param c
-   * @return
+   * @param str the string to add to 
+   * @param n number of characters to add
+   * @param c character to add
+   * @return the string with the added characters
    */
   public static String inserisci(String str, int n, char c){
     //REQUIRES: str, n, c
@@ -55,7 +55,7 @@ public class NaveSpaziale {
    * <p>Takes in input from args two numbers that are the "from" and "to" coords of a spaceship: knowing that P means "+1 to from" and S means
    * "from*4", the minimum number of steps needed to from "from" to "to" is determined
    * 
-   * @param args
+   * @param args input numbers
    */
   public static void main(String[] args){
     //REQUIRES: args[0] and args[1] cointaining int numbers

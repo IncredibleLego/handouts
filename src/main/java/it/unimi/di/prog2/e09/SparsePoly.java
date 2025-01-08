@@ -88,6 +88,8 @@ public class SparsePoly {
   }
 
   /**
+   * Finds the index of a term of a gidven degree.
+   * 
    * @param lst the not {@code null} list of not {@code null} terms and in increasing degree order.
    * @param d the degree.
    * @return the index of a term of given degree, or -1 if none is present.
@@ -134,7 +136,7 @@ public class SparsePoly {
    * present, the two will be added (and removed if the coefficient will become 0).
    *
    * @param lst the not {@code null} list of not {@code null} terms in increasing degree order.
-   * @param term the not {@code null} term.
+   * @param t the not {@code null} term.
    */
   private static void addTerm(List<Term> lst, Term t) {
     if (t.coeff == 0) return;

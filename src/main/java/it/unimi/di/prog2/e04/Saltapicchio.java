@@ -39,7 +39,7 @@ public class Saltapicchio {
    * <p>Given a value N, if all numbers given in input subtracted between them give all numbers
    * from 1 and N-1, it prints "saltapicchio"
    * 
-   * @param args
+   * @param args input number
    */
   public static void main(String []args){
     //REQUIRES: System.in

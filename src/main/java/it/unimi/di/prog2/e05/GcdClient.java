@@ -55,7 +55,7 @@ public class GcdClient {
    * 
    * <p> a scanner gets strings of numbers, converts them into arrays and converts the elements into numbers to pass to the function gcd. Prints the result
    * 
-   * @param args
+   * @param args ignored
    */
   public static void main(String[] args) {
     //REQUIRES: System.in cointaining lines of strings containing numbers convertibile into ints

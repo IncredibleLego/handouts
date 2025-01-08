@@ -79,6 +79,12 @@ public class SearchClient {
         }
     }
 
+    /**
+     * Gets a number from args and passes it to a function. Prints result
+     * 
+     * @param args input number
+     * @throws NullPointerException if args is null
+     */
     public static void main(String[] args) throws NullPointerException {
       int num = Integer.parseInt(args[0]);
       try (Scanner s = new Scanner(System.in)){

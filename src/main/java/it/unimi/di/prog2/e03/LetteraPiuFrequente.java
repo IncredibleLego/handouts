@@ -35,7 +35,7 @@ public class LetteraPiuFrequente {
    * 
    * <p>Take rows of strings, and counts each letter. System.out prints the most common letter between all strings
    * 
-   * @param args
+   * @param args input strings
    */
   public static void main(String[] args) {
     // REQUIRES: System.in contains some lines of strings

@@ -37,7 +37,7 @@ public class SommaStrana {
    * 
    * <p> Takes two numbers and sums them in colon, but when the sum is >9, the sum becomes 9 - result
    * 
-   * @param args
+   * @param args the two numbers to sum
    */
   public static void main(String[] args){
     //REQUIRES: System.in, System.out

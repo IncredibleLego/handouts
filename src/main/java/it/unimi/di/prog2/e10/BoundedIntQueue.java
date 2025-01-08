@@ -41,8 +41,20 @@ public class BoundedIntQueue {
 
   //Fields
 
+  /**
+   * The array that stores the elements of the queue.
+   */
   private final int[] queue;
-  private int start, size;
+
+  /**
+   * The index of the first element in the queue.
+   */
+  private int start;
+
+  /**
+   * The number of elements in the queue.
+   */
+  private int size;
 
   //Constructors
 

@@ -37,7 +37,7 @@ public class BoundingBox {
    * <p>Take rows of chars "." cointaining a figure formed by "*" and determines the minimum
    * dimension of the bounding box that contains the figure
    * 
-   * @param args
+   * @param args ignored
    */
     public static void main(String[] args) {
     // REQUIRES: System.in contains some line, formed by "." and "*"

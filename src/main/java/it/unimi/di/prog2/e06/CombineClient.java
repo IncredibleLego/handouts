@@ -34,8 +34,8 @@ public class CombineClient {
   /**
    * Multiplies each element of a by the sum of the elements of b
    * 
-   * @param a
-   * @param b
+   * @param a first array
+   * @param b second array
    * @throws NullPointerException if a or b is null
    */
   static void combine (int[ ] a, int[ ] b) throws NullPointerException {

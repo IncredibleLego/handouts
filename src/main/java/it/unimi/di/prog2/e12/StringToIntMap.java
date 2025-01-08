@@ -36,7 +36,15 @@ public class StringToIntMap {
   // Note: do not use the Map in Java Collections, the point is to implement it from scratch!
 
   //Fields
+
+  /**
+   * The keys of this map.
+   */
   private String[] keys;
+
+  /**
+   * The values of this map.
+   */
   private int[] values;
 
   //Constructor

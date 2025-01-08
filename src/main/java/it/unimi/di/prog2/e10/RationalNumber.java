@@ -38,7 +38,15 @@ public class RationalNumber {
 
   //Fields
 
-  private final int p, q;
+  /**
+   * The numerator of this rational number.
+   */
+  private final int p;
+  
+  /**
+   * The denominator of this rational number.
+   */
+  private final int q;
 
   //Constructors
 

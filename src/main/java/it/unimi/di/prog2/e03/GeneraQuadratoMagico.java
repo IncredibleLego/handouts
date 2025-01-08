@@ -34,7 +34,7 @@ public class GeneraQuadratoMagico {
    * 
    * <p>Generates a magic square of N*N given a number N from args
    * 
-   * @param args
+   * @param args the number N
    */
   public static void main(String[] args) {
   // REQUIRES: args[0] containing an int number
