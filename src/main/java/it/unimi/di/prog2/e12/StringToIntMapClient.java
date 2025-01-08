@@ -21,11 +21,13 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e12;
 
-/** A class to exercise some methods of {@link StringToIntMap}. */
-public class StringToIntMapClient {
+import java.util.Scanner;
 
-  /** . */
-  private StringToIntMapClient() {}
+/** A class to exercise some methods of {@link StringToIntMap}. 
+ * 
+ * @author Corrado Francesco Emanuele
+*/
+public class StringToIntMapClient {
 
   /**
    * A simple client to test the {@link StringToIntMap} class.
@@ -46,9 +48,6 @@ public class StringToIntMapClient {
    *
    * @param args not used.
    */
-
-  /*- Uncomment the following code once you have implemented the StringToIntMap class.
-
   public static void main(String[] args) {
     StringToIntMap map = new StringToIntMap();
     try (Scanner s = new Scanner(System.in)) {
@@ -58,33 +57,26 @@ public class StringToIntMapClient {
         String key = cmds.length > 1 ? cmds[1] : null;
         int value = cmds.length > 2 ? Integer.parseInt(cmds[2]) : -1;
         switch (command) {
-          case '+':
-            if (map.containsKey(key)) {
-              map.remove(key);
-              System.out.println(false);
-            } else {
-              System.out.println(true);
-            }
-            map.put(key, value);
-            break;
-          case '-':
-            System.out.println(map.remove(key));
-            break;
-          case '?':
-            System.out.println(map.get(key));
-            break;
-          case 'c':
-            map.clear();
-            break;
-          case '#':
-            System.out.println(map.size());
-            break;
-          default:
-            throw new IllegalArgumentException("Unknown command: " + command);
+          case '+' -> {
+              if (map.containsKey(key)) {
+                  map.remove(key);
+                  System.out.println(false);
+              } else {
+                  System.out.println(true);
+              }
+              map.put(key, value);
+              }
+          case '-' -> System.out.println(map.remove(key));
+          case '?' -> System.out.println(map.get(key));
+          case 'c' -> map.clear();
+          case '#' -> System.out.println(map.size());
+          default -> throw new IllegalArgumentException("Unknown command: " + command);
         }
       }
     }
   }
 
-  */
+  /** . */
+  private StringToIntMapClient() {}
+  
 }

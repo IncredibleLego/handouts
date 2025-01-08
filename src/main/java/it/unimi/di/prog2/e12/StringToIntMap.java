@@ -35,8 +35,17 @@ public class StringToIntMap {
   // EXERCISE: provide a representation, together with its AF and RI
   // Note: do not use the Map in Java Collections, the point is to implement it from scratch!
 
+  //Fields
+  private String[] keys;
+  private int[] values;
+
+  //Constructor
+
   /** Creates a new empty map. */
-  public StringToIntMap() {}
+  public StringToIntMap() {
+    keys = new String[0];
+    values = new int[0];
+  }
 
   /**
    * Returns the size of this map.
@@ -44,16 +53,16 @@ public class StringToIntMap {
    * @return the number of key-value mappings in this map.
    */
   public int size() {
-    return 0;
+    return keys.length;
   }
 
   /**
    * Returns if this map is empty.
    *
-   * @return {@code true} iff this map contains no key-value mappings.
+   * @return {@code true} if this map contains no key-value mappings.
    */
   public boolean isEmpty() {
-    return false;
+    return keys.length == 0;
   }
 
   /**
@@ -63,6 +72,11 @@ public class StringToIntMap {
    * @return {@code true} iff this map contains a key-value mappings with the given {@code key}.
    */
   public boolean containsKey(String key) {
+    for (String k : keys) {
+      if (k.equals(key)) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -73,6 +87,11 @@ public class StringToIntMap {
    * @return {@code true} iff this map contains a key-value mappings with the given {@code value}.
    */
   public boolean containsValue(int value) {
+    for (int v : values) {
+      if (v == value) {
+        return true;
+      }
+    }
     return false;
   }
 
@@ -85,7 +104,12 @@ public class StringToIntMap {
    *     {@code null}.
    */
   public int get(String key) throws NoSuchElementException {
-    return 0;
+    for (int i = 0; i < keys.length; i++) {
+      if (keys[i].equals(key)) {
+        return values[i];
+      }
+    }
+    throw new NoSuchElementException();
   }
 
   /**
@@ -96,7 +120,24 @@ public class StringToIntMap {
    * @throws IllegalArgumentException if the map already contain a mapping for the key.
    * @throws NullPointerException if the key is {@code null}.
    */
-  public void put(String key, int value) {}
+  public void put(String key, int value) {
+    if (key == null) {
+      throw new NullPointerException();
+    }
+    if (containsKey(key)) {
+      throw new IllegalArgumentException();
+    }
+    String[] newKeys = new String[keys.length + 1];
+    int[] newValues = new int[values.length + 1];
+    for (int i = 0; i < keys.length; i++) {
+      newKeys[i] = keys[i];
+      newValues[i] = values[i];
+    }
+    newKeys[keys.length] = key;
+    newValues[values.length] = value;
+    keys = newKeys;
+    values = newValues;
+  }
 
   /**
    * Removes the mapping for a key from this map if it is present.
@@ -106,9 +147,27 @@ public class StringToIntMap {
    *     modified by this operation.
    */
   public boolean remove(String key) {
-    return false;
+    if (!containsKey(key)) {
+      return false;
+    }
+    String[] newKeys = new String[keys.length - 1];
+    int[] newValues = new int[values.length - 1];
+    int j = 0;
+    for (int i = 0; i < keys.length; i++) {
+      if (!keys[i].equals(key)) {
+        newKeys[j] = keys[i];
+        newValues[j] = values[i];
+        j++;
+      }
+    }
+    keys = newKeys;
+    values = newValues;
+    return true;
   }
 
   /** Removes all of the mappings from this map. */
-  public void clear() {}
+  public void clear() {
+    keys = new String[0];
+    values = new int[0];
+  }
 }
