@@ -23,10 +23,12 @@ package it.unimi.di.prog2.h24.digraph;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
- * A directed graph implementation based on a list of {@link Arc}s and one of nodes.
+ * A <em>mutable</em> directed graph implementation based on a list of {@link Arc}s and one of
+ * nodes.
  *
  * @param <T> the type of the graph nodes.
  */
@@ -39,13 +41,25 @@ public class ArcListDiGraph<T> implements DiGraph<T> {
    */
   private final Set<T> nodes;
 
+  /** The set of graph arcs. */
+  private final Set<Arc<T>> arcs = new HashSet<>();
+
   /** Creates an empty graph. */
   public ArcListDiGraph() {
     nodes = new HashSet<>();
   }
 
-  /** The set of graph arcs. */
-  private final Set<Arc<T>> arcs = new HashSet<>();
+  /**
+   * Creates a graph with the same nodes and arcs of the given graph.
+   *
+   * @param graph the graph to copy.
+   * @throws NullPointerException if {@code graph} is {@code null}.
+   */
+  @SuppressWarnings("this-escape")
+  public ArcListDiGraph(DiGraph<? extends T> graph) {
+    this();
+    DiGraph.fill(Objects.requireNonNull(graph), this);
+  }
 
   @Override
   public void addArc(T source, T destination) {

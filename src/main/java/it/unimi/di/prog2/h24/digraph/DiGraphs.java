@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A collection of utilities related to {@link DiGraph}s.
@@ -43,13 +44,16 @@ public class DiGraphs {
    *
    * @param <T> the type of the graph nodes.
    * @param adjacency the adjacency map.
-   * @param graph the graph to fill.
+   * @param graph the mutable graph to fill.
+   * @throws NullPointerException if {@code adjacency} is or contains {@code null} or {@code graph}
+   *     is {@code null}.
+   * @throws UnsupportedOperationException if {@code graph} is immutable.
    */
   public static <T> void fromAdjacencyMap(
       final Map<T, Collection<T>> adjacency, final DiGraph<T> graph) {
-    for (Map.Entry<T, Collection<T>> e : adjacency.entrySet()) {
-      T src = e.getKey();
-      for (T dst : e.getValue()) graph.addArc(src, dst);
+    for (Map.Entry<T, Collection<T>> e : Objects.requireNonNull(adjacency).entrySet()) {
+      T src = Objects.requireNonNull(Objects.requireNonNull(e).getKey());
+      for (T dst : e.getValue()) graph.addArc(src, Objects.requireNonNull(dst));
     }
   }
 
@@ -57,26 +61,29 @@ public class DiGraphs {
    * Returns the <em>dot</em> representation of the given graph.
    *
    * @param <T> the type of the graph nodes.
-   * @param g the graph.
+   * @param graph the graph.
    * @return the <em>dot</em> representation of the given graph.
+   * @throws NullPointerException if {@code graph} is {@code null}.
    */
-  public static <T> String toDot(final DiGraph<T> g) {
-    return toDot(g, null);
+  public static <T> String toDot(final DiGraph<T> graph) {
+    return toDot(Objects.requireNonNull(graph), null);
   }
 
   /**
    * Returns the <em>dot</em> representation of the given graph.
    *
    * @param <T> the type of the graph nodes.
-   * @param g the graph.
-   * @param extra extra configuration to be added to the <em>dot</em> source.
+   * @param graph the graph.
+   * @param extra extra configuration to be added to the <em>dot</em> source, may be {@code null}.
    * @return the <em>dot</em> representation of the given graph.
+   * @throws NullPointerException if {@code graph} is {@code null}.
    */
-  public static <T> String toDot(final DiGraph<T> g, final String extra) {
+  public static <T> String toDot(final DiGraph<T> graph, final String extra) {
+    Objects.requireNonNull(graph);
     StringBuilder b = new StringBuilder();
     b.append("digraph G {\n");
     if (extra != null) b.append(extra + "\n");
-    for (Arc<T> arc : g.arcs())
+    for (Arc<T> arc : graph.arcs())
       b.append(
           String.format("\t%s -> %s;\n", arc.source().toString(), arc.destination().toString()));
     b.append("}\n");
@@ -88,10 +95,12 @@ public class DiGraphs {
    *
    * @param dot the <em>dot</em> source
    * @param path path of the PDF to create.
+   * @throws NullPointerException if {@code dot} or {@code path} is {@code null}.
    */
   public static void dotToPdf(final String dot, final String path) {
+    Objects.requireNonNull(dot);
     final ProcessBuilder pb = new ProcessBuilder("sfdp", "-T", "pdf");
-    pb.redirectOutput(new File(path));
+    pb.redirectOutput(new File(Objects.requireNonNull(path)));
     try {
       final Process p = pb.start();
       final OutputStream os = p.getOutputStream();

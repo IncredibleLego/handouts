@@ -22,16 +22,16 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 package it.unimi.di.prog2.h24.digraph;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
 /**
- * An <em>implicit</em> directed graph implementation.
+ * An <em>implicit</em>, <em>immutable</em> directed graph implementation.
  *
  * <p>Graphs of this class are defined just by a collection of nodes and a "delta" function that,
- * for every node, returns a collection giving the outgoing set. The arcs are not memorized, but
+ * for every node, returns a collection giving its outgoing set. The arcs are not memorized, but
  * computed using the "delta" function.
  *
  * @param <T> the type of the graph nodes.
@@ -53,10 +53,11 @@ public class ImplicitDiGraph<T> implements DiGraph<T> {
    *
    * @param nodes a collection of nodes.
    * @param delta the function that will be used to compute the outgoing sets.
+   * @throws NullPointerException if {@code nodes} or {@code delta} is {@code null}.
    */
   public ImplicitDiGraph(final Collection<T> nodes, final Function<T, Collection<T>> delta) {
-    this.nodes = Collections.unmodifiableSet(new HashSet<>(nodes));
-    this.delta = delta;
+    this.nodes = Set.copyOf(nodes);
+    this.delta = Objects.requireNonNull(delta);
   }
 
   @Override

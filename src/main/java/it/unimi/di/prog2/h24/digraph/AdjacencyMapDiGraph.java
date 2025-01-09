@@ -25,11 +25,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
- * A directed graph implementation based on a {@link Map} between nodes and their <em>outgoing</em>
- * sets.
+ * A <em>mutable</em> directed graph implementation based on a {@link Map} between nodes and their
+ * <em>outgoing</em> sets.
  *
  * @param <T> the type of the graph nodes.
  */
@@ -48,9 +49,22 @@ public class AdjacencyMapDiGraph<T> implements DiGraph<T> {
     adjacency = new HashMap<>();
   }
 
+  /**
+   * Creates a graph with the same nodes and arcs of the given graph.
+   *
+   * @param graph the graph to copy.
+   * @throws NullPointerException if {@code graph} is {@code null}.
+   */
+  @SuppressWarnings("this-escape")
+  public AdjacencyMapDiGraph(DiGraph<? extends T> graph) {
+    this();
+    DiGraph.fill(Objects.requireNonNull(graph), this);
+  }
+
   @Override
   public void addArc(final T src, final T dst) {
-    Set<T> outgoing = adjacency.get(src);
+    Objects.requireNonNull(dst);
+    Set<T> outgoing = adjacency.get(Objects.requireNonNull(src));
     if (outgoing == null) adjacency.put(src, outgoing = new HashSet<>());
     outgoing.add(dst);
     addNode(dst);
@@ -58,11 +72,13 @@ public class AdjacencyMapDiGraph<T> implements DiGraph<T> {
 
   @Override
   public void addNode(T node) {
-    if (!adjacency.containsKey(node)) adjacency.put(node, new HashSet<>());
+    if (!adjacency.containsKey(Objects.requireNonNull(node))) adjacency.put(node, new HashSet<>());
   }
 
   @Override
   public boolean hasArc(T src, T dst) {
+    Objects.requireNonNull(src);
+    Objects.requireNonNull(dst);
     final Set<T> outgoing = adjacency.get(src);
     if (outgoing == null) return false;
     return outgoing.contains(dst);
@@ -70,7 +86,7 @@ public class AdjacencyMapDiGraph<T> implements DiGraph<T> {
 
   @Override
   public Set<T> outgoing(T src) {
-    final Set<T> outgoing = adjacency.get(src);
+    final Set<T> outgoing = adjacency.get(Objects.requireNonNull(src));
     if (outgoing == null) return Collections.emptySet();
     return Collections.unmodifiableSet(outgoing);
   }

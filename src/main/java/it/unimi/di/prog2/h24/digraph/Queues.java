@@ -19,14 +19,14 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 */
 
-package it.unimi.di.prog2.h24;
+package it.unimi.di.prog2.h24.digraph;
 
-import it.unimi.di.prog2.h24.digraph.DiGraph;
 import java.util.AbstractQueue;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -80,8 +80,10 @@ public class Queues {
    * @param <T> the type of the graph nodes.
    * @param queue the queue to be wrapped.
    * @return the wrapped queue.
+   * @throws NullPointerException if {@code queue} is {@code null}.
    */
   public static <T> Queue<T> once(final Queue<T> queue) {
+    Objects.requireNonNull(queue);
     return new AbstractQueue<>() {
 
       final Set<T> seen = new HashSet<>();

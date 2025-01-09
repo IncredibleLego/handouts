@@ -21,10 +21,10 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.h24.digraph;
 
-import it.unimi.di.prog2.h24.Queues;
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -48,7 +48,8 @@ import java.util.function.Supplier;
  * has a default implementation in terms of such method and {@link #outgoing(Object)}, and
  * conversely {@link #outgoing(Object)} has a default implementation in terms of {@link #arcs()}, at
  * least one of these two methods must be overridden. All other methods have default implementations
- * based on {@link #outgoing(Object)} and/or {@link #arcs()}.
+ * based on {@link #outgoing(Object)} and/or {@link #arcs()}. Whenever possible, implementations
+ * should provide a <em>copy constructor</em>.
  *
  * @param <T> the type of the graph nodes.
  */
@@ -67,8 +68,10 @@ public interface DiGraph<T> {
    * @param source the source node.
    * @return the nodes that have an arc with the given {@code source} in this graph (the collection
    *     is empty if the {@code source} does not belong to this graph).
+   * @throws NullPointerException if {@code source} is {@code null}.
    */
   default Set<T> outgoing(final T source) {
+    Objects.requireNonNull(source);
     return new AbstractSet<>() {
       @Override
       public Iterator<T> iterator() {
@@ -115,8 +118,11 @@ public interface DiGraph<T> {
    * Adds a node to this graph.
    *
    * @param node the node to be added.
+   * @throws UnsupportedOperationException if this graph is immutable.
+   * @throws NullPointerException if {@code node} is {@code null}.
    */
   default void addNode(T node) {
+    Objects.requireNonNull(node);
     throw new UnsupportedOperationException();
   }
 
@@ -127,8 +133,12 @@ public interface DiGraph<T> {
    *
    * @param source the source of the arc to be added.
    * @param destination the destination of the arc to be added.
+   * @throws UnsupportedOperationException if this graph is immutable.
+   * @throws NullPointerException if {@code source} or {@code destination} are {@code null}.
    */
   default void addArc(T source, T destination) {
+    Objects.requireNonNull(source);
+    Objects.requireNonNull(destination);
     throw new UnsupportedOperationException();
   }
 
@@ -138,8 +148,11 @@ public interface DiGraph<T> {
    * <p>It the source, or destination, node are not present in the graph, they are also added.
    *
    * @param arc the arc to be added.
+   * @throws UnsupportedOperationException if this graph is immutable.
+   * @throws NullPointerException if {@code arc} is {@code null}.
    */
-  default void addArc(Arc<T> arc) {
+  default void addArc(Arc<? extends T> arc) {
+    Objects.requireNonNull(arc);
     addArc(arc.source(), arc.destination());
   }
 
@@ -149,8 +162,11 @@ public interface DiGraph<T> {
    * @param source the source of the arc to be queried.
    * @param destination the destination of the arc to be queried.
    * @return whether the arc belongs to the graph, or not.
+   * @throws NullPointerException if {@code source} or {@code destination} are {@code null}.
    */
   default boolean hasArc(T source, T destination) {
+    Objects.requireNonNull(source);
+    Objects.requireNonNull(destination);
     return outgoing(source).contains(destination);
   }
 
@@ -159,8 +175,10 @@ public interface DiGraph<T> {
    *
    * @param arc the arc to be queried.
    * @return whether the arc belongs to the graph, or not.
+   * @throws NullPointerException if {@code arc} is {@code null}.
    */
-  default boolean hasArc(Arc<T> arc) {
+  default boolean hasArc(Arc<? extends T> arc) {
+    Objects.requireNonNull(arc);
     return hasArc(arc.source(), arc.destination());
   }
 
@@ -169,9 +187,10 @@ public interface DiGraph<T> {
    *
    * @param node the node to be queried.
    * @return whether the node belongs to the graph, or not.
+   * @throws NullPointerException if {@code node} is {@code null}.
    */
   default boolean hasNode(T node) {
-    return nodes().contains(node);
+    return nodes().contains(Objects.requireNonNull(node));
   }
 
   /**
@@ -228,16 +247,34 @@ public interface DiGraph<T> {
    * Performs a visit on the graph.
    *
    * @param start the not where the visit must start.
-   * @param consumer a {@link Consumer} that will be called on every visited node.
+   * @param visit a {@link Consumer} that will be called to visit every encountered node.
    * @param supplier a {@link Supplier} providing the {@link Queue} to be used to perform the visit.
+   * @throws NullPointerException if {@code start}, {@code visit}, or {@code supplier} are {@code
+   *     null}.
    */
-  default void visit(T start, Consumer<T> consumer, Supplier<? extends Queue<T>> supplier) {
-    Queue<T> bag = Queues.once(supplier.get());
-    bag.add(start);
+  default void visit(T start, Consumer<? super T> visit, Supplier<? extends Queue<T>> supplier) {
+    Objects.requireNonNull(visit);
+    Queue<T> bag = Queues.once(Objects.requireNonNull(supplier).get());
+    bag.add(Objects.requireNonNull(start));
     while (!bag.isEmpty()) {
       T curr = bag.remove();
-      consumer.accept(curr);
+      visit.accept(curr);
       for (T t : outgoing(curr)) bag.add(t);
     }
+  }
+
+  /**
+   * Fills the given graph with the nodes and arcs of the given source graph.
+   *
+   * @param <T> the type of the destination graph nodes.
+   * @param source the source graph.
+   * @param destination the destination graph.
+   * @throws NullPointerException if {@code source} or {@code destination} are {@code null}.
+   */
+  static <T> void fill(DiGraph<? extends T> source, DiGraph<T> destination) {
+    Objects.requireNonNull(source);
+    Objects.requireNonNull(destination);
+    for (T node : source.nodes()) destination.addNode(node);
+    for (Arc<? extends T> arc : source.arcs()) destination.addArc(arc);
   }
 }

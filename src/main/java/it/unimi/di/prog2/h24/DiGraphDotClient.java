@@ -24,9 +24,12 @@ package it.unimi.di.prog2.h24;
 import it.unimi.di.prog2.h24.digraph.DiGraphs;
 import it.unimi.di.prog2.h24.digraph.ImplicitDiGraph;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.AbstractSet;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.function.Function;
 
 /** Tests <em>directed graph</em> package generating a Dot file. */
@@ -47,12 +50,40 @@ public class DiGraphDotClient {
    */
   public static void main(String[] args) throws IOException {
 
-    int start = -1, stop = -1;
-    start = Integer.parseInt(args[0]);
-    stop = Integer.parseInt(args[1]);
+    final int start = Integer.parseInt(args[0]);
+    final int stop = Integer.parseInt(args[1]);
 
-    List<Integer> nodes = new ArrayList<>();
-    for (int i = start; i < stop; i++) nodes.add(i);
+    if (start >= stop) {
+      System.err.println("Start must be less than stop");
+      System.exit(1);
+    }
+
+    Set<Integer> nodes =
+        new AbstractSet<Integer>() {
+
+          private int next = start;
+
+          @Override
+          public Iterator<Integer> iterator() {
+            return new Iterator<Integer>() {
+              @Override
+              public boolean hasNext() {
+                return next < stop;
+              }
+
+              @Override
+              public Integer next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                return next++;
+              }
+            };
+          }
+
+          @Override
+          public int size() {
+            return stop - start;
+          }
+        };
 
     Function<Integer, Collection<Integer>> delta =
         new Function<Integer, Collection<Integer>>() {

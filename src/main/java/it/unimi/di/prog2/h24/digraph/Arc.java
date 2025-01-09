@@ -26,8 +26,8 @@ import java.util.Objects;
 /**
  * An arc of a directed graph with nodes of type {@code T}.
  *
- * <p>This is an <em>immutable</em> <em>value</em> class: arcs with the same sources and
- * destinations are equal.
+ * <p>This class is <em>immutable</em>, two arcs are equal if and only if their sources and
+ * destinations are respectively equal.
  *
  * @param <T> the type of the graph nodes.
  * @param source the arc source.
