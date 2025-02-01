@@ -21,11 +21,13 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e17;
 
-/** A class to test {@link Histogram}. */
-public class HistogramClient {
+import java.util.Scanner;
 
-  /** . */
-  private HistogramClient() {}
+/** A class to test {@link Histogram}.
+ * 
+ * @author Corrado Francesco Emanuele
+ */
+public class HistogramClient {
 
   /**
    * A method to test {@link Histogram#changeBase(Rectangle, int)}.
@@ -52,7 +54,7 @@ public class HistogramClient {
     - uncomment this method and run the tests,
     - implement the square class,
     - replace new Rectangle(size, size) with new Square(size) in the following code,
-    - run the tests again.
+    - run the tests again. */
 
   public static void main(String[] args) {
     Histogram histogram = new Histogram();
@@ -60,14 +62,19 @@ public class HistogramClient {
     try (Scanner sc = new Scanner(System.in)) {
       while (sc.hasNextInt()) {
         final int size = sc.nextInt();
-        final Rectangle rectangle = new Rectangle(size, size);
+        final Rectangle rectangle = new Square(size); // Cambiato Rectangle con Square
         if (firstRectangle == null) firstRectangle = rectangle;
         histogram.add(rectangle);
       }
     }
     for (Rectangle rectangle : histogram) System.out.println(rectangle.height());
-    histogram.changeBase(firstRectangle, firstRectangle.base() * 2);
+    if (firstRectangle != null) {
+        histogram.changeBase(firstRectangle, firstRectangle.base() * 2);
+    }
     for (Rectangle rectangle : histogram) System.out.println(rectangle.height());
   }
-  */
+
+  /** . */
+  private HistogramClient() {}
+
 }

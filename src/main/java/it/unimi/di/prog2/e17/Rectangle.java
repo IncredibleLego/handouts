@@ -33,13 +33,35 @@ public class Rectangle {
     Finish the implementation of the class.
   */
 
+  //Fields
+
+  /**
+   * The base of the rectangle.
+   */
+  private int base;
+
+  /**
+   * The height of the rectangle.
+   */
+  private int height;
+
+  //Constructor
+
   /**
    * Creates a rectangle of given base and height.
    *
    * @param base the base of the rectangle.
    * @param height height of the rectangle.
    */
-  public Rectangle(int base, int height) {}
+  public Rectangle(int base, int height) {
+    if (base <= 0 || height <= 0) {
+      throw new IllegalArgumentException("Base and height must be positive integers.");
+    }
+    this.base = base;
+    this.height = height;
+  }
+
+  //Methods
 
   /**
    * Returns the base of the rectangle.
@@ -47,7 +69,7 @@ public class Rectangle {
    * @return the base of the rectangle.
    */
   public int base() {
-    return 0;
+    return this.base;
   }
 
   /**
@@ -55,7 +77,24 @@ public class Rectangle {
    *
    * @param base the new base of the rectangle.
    */
-  public void base(int base) {}
+  public void base(int base) {
+    if (base <= 0) {
+      throw new IllegalArgumentException("Base must be a positive integer.");
+    }
+    this.base = base;
+  }
+
+  /**
+   * Sets the base of the rectangle.
+   *
+   * @param base the new base of the rectangle.
+   */
+  public void setBase(int base) {
+    if (base <= 0) {
+      throw new IllegalArgumentException("Base must be a positive integer.");
+    }
+    this.base = base;
+  }
 
   /**
    * Returns the height of the rectangle.
@@ -63,7 +102,7 @@ public class Rectangle {
    * @return the height of the rectangle.
    */
   public int height() {
-    return 0;
+    return height;
   }
 
   /**
@@ -71,10 +110,16 @@ public class Rectangle {
    *
    * @param height the new height of the rectangle.
    */
-  public void height(int height) {}
+  public void height(int height) {
+    if (height <= 0) {
+      throw new IllegalArgumentException("Height must be a positive integer.");
+    }
+    this.height = height;
+  }
 
   @Override
   public String toString() {
-    return null;
+    return "Rectangle{" + "base=" + base + ", height=" + height + '}';
+    //return null;
   }
 }

@@ -23,6 +23,9 @@ package it.unimi.di.prog2.e17;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A class to handle a list of rectangles and organize them as in histogram.
@@ -32,24 +35,22 @@ import java.util.NoSuchElementException;
  */
 public class Histogram implements Iterable<Rectangle> {
 
-  /*-
-    Decide what fields to use to represent a rectangle and
-    provide the AF and IR.
-
-    Check the specification, possibly adding missing exceptions.
-
-    Finish the implementation of the class.
-  */
+  private final List<Rectangle> rectangles;
 
   /** Creates an empty histogram. */
-  public Histogram() {}
+  public Histogram() {
+    this.rectangles = new ArrayList<>();
+  }
 
   /**
    * Adds a {@link Rectangle} to this histogram.
    *
    * @param rectangle the rectangle to add.
    */
-  public void add(Rectangle rectangle) {}
+  public void add(Rectangle rectangle) {
+    rectangles.add(rectangle);
+    rectangles.sort((r1, r2) -> Integer.compare(r2.height(), r1.height()));
+  }
 
   /**
    * Changes the base of the given rectangle
@@ -58,7 +59,13 @@ public class Histogram implements Iterable<Rectangle> {
    * @param newBase the new base.
    * @throws NoSuchElementException if the rectangle is not in the histogram.
    */
-  public void changeBase(Rectangle rectangle, int newBase) {}
+  public void changeBase(Rectangle rectangle, int newBase) {
+    if (!rectangles.contains(rectangle)) {
+      throw new NoSuchElementException("Rectangle not found in histogram");
+    }
+    rectangle.setBase(newBase);
+    rectangles.sort((r1, r2) -> Integer.compare(r2.height(), r1.height()));
+  }
 
   /**
    * Returns an iterator that produces the rectangles in this histogram in decreasing height order.
@@ -67,6 +74,6 @@ public class Histogram implements Iterable<Rectangle> {
    */
   @Override
   public Iterator<Rectangle> iterator() {
-    return null;
+    return Collections.unmodifiableList(rectangles).iterator();
   }
 }

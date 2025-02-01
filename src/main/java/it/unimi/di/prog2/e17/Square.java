@@ -34,11 +34,11 @@ public class Square extends Rectangle {
   */
 
   /**
-   * Creates a rectangle of given base and height.
+   * Creates a square of given side length.
    *
-   * @param base the base of the rectangle.
+   * @param side the side length of the square.
    */
-  public Square(final int base) {
-    super(base, base);
+  public Square(final int side) {
+    super(side, side);
   }
 }
