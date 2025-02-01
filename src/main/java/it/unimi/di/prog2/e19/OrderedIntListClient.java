@@ -21,7 +21,11 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e19;
 
-/** A class to test ordered lists. */
+import java.util.Scanner;
+
+import static it.unimi.di.prog2.s19.IteratorUtils.join;
+
+/** A class to test {@link OrderedIntList}. */
 public class OrderedIntListClient {
 
   /** . */
@@ -33,15 +37,12 @@ public class OrderedIntListClient {
    *
    * @param args not used.
    */
-
-  /*- uncomment once you have done developing the OrdereIntList
-   public static void main(String[] args) {
+  public static void main(String[] args) {
     OrderedIntList list = new OrderedIntList();
     try (Scanner s = new Scanner(System.in)) {
-      while (s.hasNextInt()) list.addEl(s.nextInt());
+      while (s.hasNextInt()) list.add(s.nextInt());
     }
     System.out.println(join(list.smallToBig(), ", "));
     System.out.println(join(list.bigToSmall(), ", "));
   }
-  */
 }
