@@ -7,14 +7,10 @@
 Questo repository contiene gli *handout* dell'insegnamento di [Programmazione
 II](https://prog2.di.unimi.it/) del corso di laurea in
 [Informatica](https://informatica.cdl.unimi.it/it) dell'[Università degli Studi
-di Milano](http://www.unimi.it/). Si tratta di una copia della [Repository ufficiale](https://github.com/prog2-unimi/handouts) del prof. Questa repository
-è stata creata con lo scopo di allenarsi ad usare Git.
+di Milano](http://www.unimi.it/). Si tratta di una copia della [Repository ufficiale](https://github.com/prog2-unimi/handouts) del prof.
 
-Il materiale di questo repository (aggiornato periodicamente) consiste nella
-collezione del *materiale didattico* prodotto dal docente e dalla soluzione o implementazione
-degli esercizi svolti dallo studente.
+Gli esercizi sono stati tutti completati e funzionano correttamente passando i test
 
-La situazione attuale della risoluzione degli esercizi e test può essere visualizzata [qui](build/reports/tests/test/classesJubbiotTest.html)
 ## Guida all'uso di Git
 Come è gestito Git?
 ![schema](/assets/images/schema.png)
@@ -142,4 +138,4 @@ preparazione e la propria capacita di comunicare in modo chiaro e completo.
 
 [comment]: <> (Per modificare il file con l'anteprima premere CTRL + Shift + V)
 
-**Francesco Corrado 2024**
+**Francesco Corrado 2025**
